@@ -35,29 +35,29 @@
                             </div>   
                             <div class="form-group">
                                 <label>번호</label>
-                                <input class="form-control" name='##' readonly>
+                                <input class="form-control" name='num' value= "${detail.bno }" readonly>
                             </div>
                             <div class="form-group">
                                 <label>작성자</label>
-                                <input class="form-control" name='##' readonly>
+                                <input class="form-control" name='writer' value= "${detail.writer }" readonly>
                             </div>    
                             <div class="form-group">
                                 <label>제목</label>
-                                <input class="form-control" name='##' readonly>
+                                <input class="form-control" name='title' style="background-color:#777" value= "${detail.title }"  readonly>
                             </div>
-
                             <div class="form-group">
                                 <label>내용</label>
-                                <textarea class="form-control" rows="10" name='##' readonly></textarea>
+                                <textarea class="form-control" rows="10" name='content' readonly>${detail.content }</textarea>
                             </div>
-
-                            <button type="button" class="btn btn-primary">변경</button>
-                            <button type="button" class="btn btn-dark">목록</button>
+                            <button type="button" class="btn btn-primary" id="updateBtn">변경</button>
+                            <button type="button" class="btn btn-dark" >목록</button>
                     </form>
                 </div>
             </div>
         </div>
         </section>
+        
+        
         
         <section style="margin-top: 80px;">
             <div class="container">
@@ -105,6 +105,18 @@
         </section>
         
         <%@ include file="../include/footer.jsp" %>
+        
+        <script>
+        	var updateBtn = document.getElementById("updateBtn");
+        	updateBtn.onclick = function() {
+        		/*
+        		1. 폼에 데이터가 공백인지 확인처리.
+        		2. 공백이 없으면 Controller에 freeUpdate요청으로 데이터를 전송.
+        		3. 컨트롤러에서는 int update() 메서드를 사용해서 정보를 수정.
+        		4. 컨트롤러에서는 업데이트 성공시 "게시글 수정이 정상 처리되었습니다." 를 출력해주세요.
+        		*/
+        	}
+        </script>
         
 	<!-- 모달 -->
 	<div class="modal fade" id="replyModal" role="dialog">

@@ -14,6 +14,6 @@ public class FreeBoardVO {
 	private String title;
 	private String writer;
 	private String content;
-	private Timestamp date;
+	private Timestamp regdate;
 	private Timestamp updatedate;
 }

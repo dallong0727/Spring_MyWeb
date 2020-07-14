@@ -1,5 +1,7 @@
 ﻿<%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -55,27 +57,15 @@
                             </tr>
                         </thead>
                         <tbody>
+                        	<c:forEach var="vo" items="${boardList}" varStatus="num">
                             <tr>
-                                <td>1</td>
-                                <td><a href="##">첫글</a></td>
-                                <td>홍길순</td>
-                                <td>~~~~~</td>
-                                <td>~~~~~</td>
+                            	<td>${vo.bno }</td>
+                                <td><a href="freeDetail?bno=${vo.bno}">${vo.title}</a></td>
+                                <td>${vo.writer }</td>
+                                <td><fmt:formatDate value="${vo.regdate}" pattern="yyyy-MM-dd hh:mm:ss"/></td>
+                             	<td><fmt:formatDate value="${vo.updatedate}" pattern="yyyy-MM-dd hh:mm:ss"/></td>
                             </tr>
-                            <tr>
-                                <td>2</td>
-                                <td><a href="##">두글</a></td>
-                                <td>홍길순</td>
-                                <td>~~~~~</td>
-                                <td>~~~~~</td>
-                            </tr>
-                            <tr>
-                                <td>3</td>
-                                <td><a href="##">세글</a></td>
-                                <td>홍길순</td>
-                                <td>~~~~~</td>
-                                <td>~~~~~</td>
-                            </tr>
+                          	</c:forEach>
                         </tbody>
                         
                     </table>
@@ -102,16 +92,25 @@
             </div>
         </div>
 	</section>
+	<%@ include file="../include/footer.jsp" %>
+	
+
+	<script>
+		window.onload = function() { //화면 로딩이 끝난 직후에 실행
+			//기록이 변경 되었다면, 함수 종료
+			if(history.state === '') {
+				return;
+			}
+			var msg = '${msg}';
+			if(msg !== '') {
+				alert(msg);
+			}
+			//(추가할 데이터, 페이지 제목, 변경할 주소) - 기존 기록을 삭제하고 새로운 기록을 추가
+			//이렇게 추가된 데이터를 history.state로 확인이 가능
+			history.replaceState('', null, null); 
+		}
+	</script>
+	
 </body>
-<%@ include file="../include/footer.jsp" %>
-
-
-
-
-
-
-
-
-
 </html>
 

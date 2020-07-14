@@ -1,5 +1,7 @@
 package com.team404.freeboard.service;
 
+import java.util.ArrayList;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,4 +20,15 @@ public class FreeBoardServiceImpl implements FreeBoardService{
 		
 	}
 
+	@Override
+	public ArrayList<FreeBoardVO> getList() {
+		return freeBoardMapper.getList();
+	}
+
+	@Override
+	public FreeBoardVO getContent(int bno) {
+		return freeBoardMapper.getContent(bno);
+	}
+
+	
 }
