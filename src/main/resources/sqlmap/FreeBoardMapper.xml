@@ -8,11 +8,28 @@
 		insert into freeboard(bno,title,writer,content) values(freeboard_seq.nextval,#{title},#{writer},#{content})
 	</insert>
 	
+	<!-- CDATA는 부등호를 사용할 때 문자열 그대로 인식되도록 쓸 때 쿼리문을 감싸줍니다. -->
 	<select id="getList" resultType="FreeBoardVO">
-		select * from freeboard order by bno desc
+		<![CDATA[
+		select * from 
+		(select rowNum as rn, bno, writer, title, content, regdate, updatedate from 
+		(select * from freeboard order by bno desc)) where rn > (#{pageNum}-1)*#{amount} and rn <= #{pageNum}*#{amount}
+		]]>
+	</select>
+	
+	<select id="getTotal" resultType="int">
+		select count(*) as total from freeboard
 	</select>
 	
 	<select id="getContent" resultType="FreeBoardVO">
 		select * from freeboard where bno=#{bno}
 	</select>
+	
+	<update id="getUpdate">
+		update freeboard set title = #{title}, writer = #{writer}, content=#{content}, updatedate=sysdate where bno=#{bno}
+	</update>
+	
+	<delete id="getDelete">
+		delete from freeboard where bno=#{bno}
+	</delete>
 </mapper>

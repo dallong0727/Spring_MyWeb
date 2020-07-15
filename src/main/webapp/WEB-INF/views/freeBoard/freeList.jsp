@@ -35,6 +35,10 @@
                     <!--form select를 가져온다 -->
                     <form>
 		    <div class="search-wrap">
+		    			<span>총 ${pageVO.total}개</span>
+		    			
+		    
+		    
                        <button type="button" class="btn btn-info search-btn">검색</button>
                        <input type="text" class="form-control search-input">
                        <select class="form-control search-select">
@@ -59,30 +63,32 @@
                         <tbody>
                         	<c:forEach var="vo" items="${boardList}" varStatus="num">
                             <tr>
-                            	<td>${vo.bno }</td>
+                            	<td>${vo.bno}</td>
                                 <td><a href="freeDetail?bno=${vo.bno}">${vo.title}</a></td>
-                                <td>${vo.writer }</td>
+                                <td>${vo.writer}</td>
                                 <td><fmt:formatDate value="${vo.regdate}" pattern="yyyy-MM-dd hh:mm:ss"/></td>
                              	<td><fmt:formatDate value="${vo.updatedate}" pattern="yyyy-MM-dd hh:mm:ss"/></td>
                             </tr>
                           	</c:forEach>
                         </tbody>
-                        
                     </table>
-
 
                     <!--페이지 네이션을 가져옴-->
 		    <form>
                     <div class="text-center">
                     <hr>
                     <ul class="pagination pagination-sm">
-                        <li><a href="#">이전</a></li>
-                        <li  class="active"><a href="#">1</a></li>
-                        <li><a href="#">2</a></li>
-                        <li><a href="#">3</a></li>
-                        <li><a href="#">4</a></li>
-                        <li><a href="#">5</a></li>
-                        <li><a href="#">다음</a></li>
+	                    <c:if test="${pageVO.prev}">
+	                    	<li><a href="freeList?pageNum=${pageVO.startPage-1}&amount=${pageVO.amount}">이전</a></li>
+	                    </c:if>
+	                    <c:forEach var="num" begin="${pageVO.startPage}" end="${pageVO.endPage}">
+	                        <li class=${pageVO.pageNum == num ? "active":"" }>
+	                        <a href="freeList?pageNum=${num}&amount=${pageVO.amount}">${num}</a>
+	                        </li>
+	                    </c:forEach>
+	                     <c:if test="${pageVO.next}">
+	                    	 <li><a href="freeList?pageNum=${pageVO.endPage+1}&amount=${pageVO.amount}">다음</a></li>
+	                    </c:if>
                     </ul>
                     <button type="button" class="btn btn-info" onclick="location.href='freeRegist' ">글쓰기</button>
                     </div>

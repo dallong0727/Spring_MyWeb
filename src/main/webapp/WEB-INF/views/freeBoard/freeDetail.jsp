@@ -1,5 +1,6 @@
 ﻿<%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -28,14 +29,14 @@
                             <p>상세보기</p>
                         </div>
                         
-                        <form>
+                        <form action="freeModify?bno=${detail.bno}" name="Detailform" method="post">
                             <div>
                                 <label>DATE</label>
-                                <p>2019-12-12</p>
+                                <p><fmt:formatDate value="${detail.regdate}" pattern="yyyy-MM-dd"/></p>
                             </div>   
                             <div class="form-group">
                                 <label>번호</label>
-                                <input class="form-control" name='num' value= "${detail.bno }" readonly>
+                                <input class="form-control" name='bno' value= "${detail.bno }" readonly>
                             </div>
                             <div class="form-group">
                                 <label>작성자</label>
@@ -49,8 +50,8 @@
                                 <label>내용</label>
                                 <textarea class="form-control" rows="10" name='content' readonly>${detail.content }</textarea>
                             </div>
-                            <button type="button" class="btn btn-primary" id="updateBtn">변경</button>
-                            <button type="button" class="btn btn-dark" >목록</button>
+                            <button type="submit" class="btn btn-primary">변경</button>
+                            <button type="button" class="btn btn-dark" id="listBtn">목록</button>
                     </form>
                 </div>
             </div>
@@ -92,8 +93,8 @@
                                 <div class='reply-group'>
                                     <strong class='left'>honggildong</strong> 
                                     <small class='left'>2019/12/10</small>
-                                    <a href='#' class='right'><span class='glyphicon glyphicon-pencil'></span>수정</a>
-                                    <a href='#' class='right'><span class='glyphicon glyphicon-remove'></span>삭제</a>
+                                    <a href='##' class='right'><span class='glyphicon glyphicon-pencil'></span>수정</a>
+                                    <a href='##' class='right'><span class='glyphicon glyphicon-remove'></span>삭제</a>
                                 </div>
                                 <p class='clearfix'>여기는 댓글영역</p>
                             </div>
@@ -105,18 +106,13 @@
         </section>
         
         <%@ include file="../include/footer.jsp" %>
-        
         <script>
-        	var updateBtn = document.getElementById("updateBtn");
-        	updateBtn.onclick = function() {
-        		/*
-        		1. 폼에 데이터가 공백인지 확인처리.
-        		2. 공백이 없으면 Controller에 freeUpdate요청으로 데이터를 전송.
-        		3. 컨트롤러에서는 int update() 메서드를 사용해서 정보를 수정.
-        		4. 컨트롤러에서는 업데이트 성공시 "게시글 수정이 정상 처리되었습니다." 를 출력해주세요.
-        		*/
-        	}
-        </script>
+        //목록이동
+			var listBtn = document.getElementById("listBtn");
+			listBtn.onclick = function() {
+				location.href = "freeList"; //목록화면이동
+			}
+		</script>
         
 	<!-- 모달 -->
 	<div class="modal fade" id="replyModal" role="dialog">
